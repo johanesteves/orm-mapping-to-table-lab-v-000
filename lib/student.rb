@@ -35,8 +35,8 @@ class Student
     SQL
 
     db[:conn].execture(sql, name, grade)
-
     @id = db[:conn].execture("SELECT last_insert_rowid()")[0][0]
+    
   end
 
 
