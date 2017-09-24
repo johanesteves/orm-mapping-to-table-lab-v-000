@@ -4,8 +4,10 @@ class Student
   # Remember, you can access your database connection anywhere in this class
   #  with DB[:conn]
 
-  def initialize
-
+  def initialize(name, grade, id = nil)
+    @name = name
+    @grade = grade
+    @id = id 
   end
 
   def self.create_table
@@ -28,7 +30,7 @@ class Student
     db[:conn].execture(sql)
   end
 
-  def save(name:, grade:)
+  def save(name, grade)
     sql = <<-SQL
     INSERT INTO students (name, grade)
     VALUES (?, ?)
@@ -36,8 +38,12 @@ class Student
 
     db[:conn].execture(sql, name, grade)
     @id = db[:conn].execture("SELECT last_insert_rowid()")[0][0]
-    
+
   end
 
+  def create(name:, grade:)
+    new_student
+
+  end
 
 end
