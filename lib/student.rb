@@ -30,19 +30,21 @@ class Student
     db[:conn].execture(sql)
   end
 
-  def save(name, grade)
+  def save
     sql = <<-SQL
     INSERT INTO students (name, grade)
     VALUES (?, ?)
     SQL
 
-    db[:conn].execture(sql, name, grade)
+    db[:conn].execture(sql, self.name, self.grade)
     @id = db[:conn].execture("SELECT last_insert_rowid()")[0][0]
 
   end
 
-  def create(name:, grade:)
-    new_student
+  def self.create(name:, grade:)
+    new_student = self.new(name, grade).tap do |student|
+      student.save(name, grade)
+    end
 
   end
 
