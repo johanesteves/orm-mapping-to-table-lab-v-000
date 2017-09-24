@@ -7,7 +7,7 @@ class Student
   def initialize(name, grade, id = nil)
     @name = name
     @grade = grade
-    @id = id 
+    @id = id
   end
 
   def self.create_table
@@ -19,7 +19,7 @@ class Student
     )
     SQL
 
-    db[:conn].execture(sql)
+    db[:conn].execute(sql)
   end
 
   def self.drop_table
@@ -27,7 +27,7 @@ class Student
     DROP TABLE students
     SQL
 
-    db[:conn].execture(sql)
+    db[:conn].execute(sql)
   end
 
   def save
@@ -36,8 +36,8 @@ class Student
     VALUES (?, ?)
     SQL
 
-    db[:conn].execture(sql, self.name, self.grade)
-    @id = db[:conn].execture("SELECT last_insert_rowid()")[0][0]
+    db[:conn].execute(sql, self.name, self.grade)
+    @id = db[:conn].execute("SELECT last_insert_rowid()")[0][0]
 
   end
 
