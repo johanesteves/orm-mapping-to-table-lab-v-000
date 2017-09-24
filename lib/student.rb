@@ -30,11 +30,13 @@ class Student
 
   def save(name:, grade:)
     sql = <<-SQL
-    INSERT INTO students(name, grade)
+    INSERT INTO students (name, grade)
     VALUES (?, ?)
     SQL
 
     db[:conn].execture(sql, name, grade)
+
+    @id = db[:conn].execture("SELECT last_insert_rowid()")[0][0]
   end
 
 
