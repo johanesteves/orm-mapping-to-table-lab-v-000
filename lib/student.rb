@@ -43,7 +43,7 @@ class Student
 
   def self.create(name:, grade:)
     new_student = self.new(name, grade).tap do |student|
-      student.save(name, grade)
+      student.save
     end
 
   end
